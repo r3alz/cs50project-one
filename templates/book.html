@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    {{ headline }}
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{url_for('index')}}">Book World</a>
+        <form class="form-inline my-2 my-lg-0" action="{{url_for('index')}}" method="POST">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="text">
+            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a href="{{ url_for('logout') }}">logout</a>
+    </nav>
+    <div class="container">
+        <div>
+            Title:<h2> {{data.title}}</h2>
+            Author:<h2> {{data.author}}</h2>
+            Year:<h2> {{data.year}}</h2>
+            Isbn:<h2> {{data.isbn}}</h2>
+        </div>
+        <div>
+            Goodreads.com Average ratings: {{avg_rating}}
+            Ratings Count: {{rtngs_count}}
+        </div>
+        <hr>
+    </div>
+    <div class="container bg-light my-3">
+        <h4 class="text-center"><strong>Reviews</strong></h4>
+        {% if reviews != None %}
+            {% for x in reviews %}
+                <h3>Rating: {{x.rating}} of 5</h3>
+                <blockquote class="blockquote">
+                <p>{{x.review}}</p>
+                <footer class="blockquote-footer">{{x.username}}</footer>
+                </blockquote>
+            {% endfor %}
+        {% endif %}
+    </div>
+    <div class="container">
+        <hr>
+        <div class='text-center text-danger'>{{message}}</div>
+        <form action="{{url_for('books',title=data.title, isbn=data.isbn)}}" method="POST">
+            <label class='text-danger'>Write your review...</label>
+            <select name="stars" class='m-1' required>
+                <option selected value disabled> -- select rating -- </option>
+                <option value="1">1 star</option>
+                <option value="2">2 stars</option>
+                <option value="3">3 stars</option>
+                <option value="4">4 stars</option>
+                <option value="5">5 stars</option>
+            </select> 
+            <textarea class='form-control' name='textarea'>
+            </textarea>
+            <button type="submit">submit</button>
+        </form>
+    </div>
+{% endblock %}

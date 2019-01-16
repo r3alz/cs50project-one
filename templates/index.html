@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block heading %}
+    {{ headline }}
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Book World</a>
+        <form class="form-inline my-2 my-lg-0" action="{{url_for('index')}}" method="POST">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" name="text">
+            <button class="btn my-2 my-sm-0" type="submit">Search</button>
+        </form>
+        <a href="{{ url_for('logout') }}">logout</a>
+    </nav>
+    {% if data %}
+        {% for x in data %}
+            <a href="/{{x.title}}/{{x.isbn}}">
+                <h5>{{x.title}}</h5>
+                    by {{x.author}} in {{x.year}}
+                <h6>isbn: {{x.isbn}}</h6>
+            </a>
+        {% endfor %} 
+    {% else %}
+        <h5 class="text-center">Use the search box above to search for a book.</h5>
+        <br>
+        <div class="text-center">
+            <img class="rounded" src="static/coolbook.jpg" height="50%" width="50%">
+        </div>
+    {% endif %}
+{% endblock %}
+
