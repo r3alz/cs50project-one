@@ -1,28 +1,39 @@
-{% extends "layout.html" %}
-
-{% block heading %}
-    {{ headline }}
-{% endblock %}
-
-{% block body %} 
-    <nav class="navbar navbar-dark bg-dark">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="{{ url_for('index') }}">Book World</a>
-            </div>
-            <form class="form-inline navbar-form navbar-left" action="{{url_for('index')}}" method="POST">
-                <input type="search" class="form-control mr-sm-2" placeholder="Search" name="text">
-                <button type="submit" class="btn my-2 my-sm-0">Submit</button>
-            </form>
-                <ul class="navbar-nav navbar-right">
-                    <li><a href="{{ url_for('login') }}">sign in</a></li>
-                    <li><a href="{{ url_for('register') }}">register</a></li>
-                </ul>
-        </div>
-    </nav>
-    <p class="text-center text-danger">{{login_message}}</p>
-    <div class="text-center">
-        <img class="rounded" src="static/coolbook.jpg" height="50%" width="50%">
+{% extends "layout.html" %} {% block heading %} {{ headline }} {% endblock %} {%
+block body %}
+<nav class="navbar navbar-dark bg-dark icon">
+  <div class="container-fluid">
+    <div class="mobile-navbar-left">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{ url_for('index') }}">Book World</a>
+      </div>
+      <form
+        class="form-inline navbar-form navbar-left"
+        action="{{ url_for('index') }}"
+        method="POST"
+      >
+        <input
+          type="search"
+          class="form-control mr-sm-2 search"
+          placeholder="Search"
+          name="text"
+        />
+        <button type="submit" class="submit btn my-2 my-sm-0">Submit</button>
+      </form>
     </div>
+    <ul class="navbar-nav navbar-right">
+      <li><a href="{{ url_for('login') }}">sign in</a></li>
+      <li><a class="register" href="{{ url_for('register') }}">register</a></li>
+    </ul>
+  </div>
+</nav>
+<p class="text-center text-danger">{{ login_message }}</p>
+<div class="text-center">
+  <img
+    class="rounded book"
+    src="static/coolbook.jpg"
+    height="50%"
+    width="50%"
+  />
+</div>
 
 {% endblock %}
