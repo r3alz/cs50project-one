@@ -10,7 +10,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from classes import User
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -51,11 +51,11 @@ def login():
         message=('')
         username = request.form.get("username")
         password = request.form.get("password")
-        result = db.execute("SELECT id, name, email, username, password FROM users WHERE username=:username AND password=:password", {"username": username, "password": password}).fetchone()
+        result = db.execute("SELECT name, email, username, password FROM users WHERE username=:username AND password=:password", {"username": username, "password": password}).fetchone()
         if result is None:
         	return render_template("login.html", message="Username or password incorrect")
         else:
-            user = User(result.id, result.name, result.email, result.username, result.password)
+            user = User(result.name, result.email, result.username, result.password)
 
         if user:
             session["user"] = user

@@ -1,3 +1,5 @@
 {
-    "python.linting.enabled": false
+    "python.linting.enabled": false,
+    "python.pythonPath": "cs50project-one\\Scripts\\python.exe",
+    "python.formatting.provider": "black"
 }
